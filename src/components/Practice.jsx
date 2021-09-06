@@ -1,39 +1,65 @@
-import React , { useContext, useEffect, useState }  from 'react';
+import React , { useContext,  useEffect,  useState }  from 'react';
 import AppContext from '../contexts/AppContext';
 import {Link} from 'react-router-dom';
 
 const Practice = () => {
-  const { state, dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
   let copy_s = [...state]
-  console.log(state)
-  console.log(copy_s)
+  let n = 0
   let questions = []
-for(let i = 0; i<copy_s.length; i++) {
+for(let i = 0; i < state.length; i++) {
    questions.push(copy_s.splice(Math.floor(Math.random()*copy_s.length),1)[0].question);
 }
-  console.log(questions)
-  
+const [qu, setQu] = useState(questions[n])
 
-  // console.log(questions) //length 5
-  // let qu = questions.splice(Math.floor(Math.random()*questions.length),1)[0].question;
-  // console.log(qu)
-  // console.log(questions) //length 4
-  // const [qe, setQe] = useState(qu)
-  const shuffleQuestion = () => {
-    console.log(questions)
-    // qu = questions.splice(Math.floor(Math.random()*questions.length),1)[0].question;
-    // console.log(questions)
-    // setQe(qu)
-    // // setQe(q)
-  }
-  // console.log(stateCopy.splice(Math.floor(Math.random()*stateCopy.length),1)[0])
+// const [m, setM] = useState('')
+// const [s, setS] = useState('')
+
+// const set = () => {
+//     const d = new Date(Date.now() - startTime);
+//     setM(d.getMinutes()) 
+//     setS(d.getSeconds()) 
+// }
+// useEffect(() => {
+//   set();
+// }, [n])
+
+
+let startTime;
+const time= document.getElementById('time')
+// let m;
+// let s
+const timer = () =>  {
+    const d = new Date(Date.now() - startTime)
+    const m = String(d.getMinutes()).padStart(2, '0');
+    const s = String(d.getSeconds()).padStart(2, '0');
+    console.log(m, s)
+    time.innerText= `${m}:${s}`
+    setTimeout(timer, 10)
+}
+
+const nextQuestion = () => {
+  n++;
+  console.log(n)
+  setQu(questions[n])
+  startTime = Date.now();
+  time.innerText = ''
+  timer()
+  
+}
+
   return(
     <>
-      <div>
-        <p>
-         {/* {qe} */}
+      <div className="question__display">
+        <div className="image__area">
+          <img src="" alt=""/>
+        </div>
+        <p className="question">
+         {qu}
         </p>
-        <button onClick={shuffleQuestion}>Next</button>
+  {/* <p id="time" className="time mt">{`${m}:${s}`}</p> */}
+  <p id="time" className="time mt">00:00</p>
+        <button className="btn button__link next_mt" onClick={nextQuestion}>Next</button>
       </div>
     </>
   )
@@ -41,19 +67,3 @@ for(let i = 0; i<copy_s.length; i++) {
 
 export default Practice;
 
-/**
- * 問題
- * questionsの変数が変更されない
- *
- * 現状
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- */

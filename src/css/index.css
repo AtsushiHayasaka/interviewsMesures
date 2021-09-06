@@ -1,7 +1,7 @@
 body {
   margin-top: 100px;
   text-align: center;
-  padding: 30px 50px;
+  /* padding: 30px 50px; */
   font-size: 25px;
 }
 
@@ -73,4 +73,23 @@ td {
 .button__link {
   display: block;
   width: 20%;
+}
+
+.question__display {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.time {
+  font-size: 30px;
+}
+
+.question {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.next_mt {
+  margin-top: 130px;
 }
